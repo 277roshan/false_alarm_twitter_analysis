@@ -45,7 +45,17 @@ var client = new Twitter({
 var params = {screen_name: 'nodejs'};
 client.get('search/tweets.json?q=%23fire&src=typd', params, function(error, tweets, response){
   if (!error) {
+<<<<<<< HEAD
    
+=======
+    
+    for (x = 0; x < tweets.statuses.length; x++){
+
+      console.log(tweets.statuses[x].text);
+      console.log("    ");
+    }
+    console.log(tweets.search_metadata.count);
+>>>>>>> cfe6bf609f487d8ed453b37004bd28b9f6488b1f
 
     app.get('/',function(req,res){
       res.sendFile(path.join(__dirname + '/index.html'),{x:"sadf"});
