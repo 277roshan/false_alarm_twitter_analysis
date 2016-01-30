@@ -52,9 +52,8 @@ var client = new Twitter({
 });
  
 
-var current_tweet=""
-
-client.stream('statuses/filter', {track: 'happy'}, function(stream) {
+var current_tweet = ''
+client.stream('statuses/filter', {track: 'fire'}, function(stream) {
   stream.on('data', function(tweet) {
     // console.log(tweet.text);
     //   app.get('/',function(req,res){
@@ -63,7 +62,9 @@ client.stream('statuses/filter', {track: 'happy'}, function(stream) {
     // });
   current_tweet = tweet
 
- 
+
+
+  });
  
   stream.on('error', function(error) {
     throw error;
@@ -71,17 +72,19 @@ client.stream('statuses/filter', {track: 'happy'}, function(stream) {
 });
 
 
+setInterval(function() {
+  // method to be executed;
+
+  
+  io.sockets.emit('news', { hello: current_tweet });
+  
+  
 
 
- io.on('connection', function (socket) {
-  socket.emit('news', { hello: current_tweet });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
 
 
-  });
+}, 5000);
+
  
 
 
@@ -93,7 +96,12 @@ client.stream('statuses/filter', {track: 'happy'}, function(stream) {
 
 
 
-
+//   io.on('connection', function (socket) {
+//   socket.emit('news', { hello: current_tweet });
+//   socket.on('my other event', function (data) {
+//     console.log(data);
+//   });
+// });
 
 
 
