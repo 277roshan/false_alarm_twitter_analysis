@@ -1,17 +1,23 @@
 <html>
 
 <head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 <script src="/socket.io/socket.io.js"></script>
 
 
+
+<div>hi</div>
+
+
 <script>
   var socket = io('http://localhost:8300');
   socket.on('news', function (data) {
     console.log(data);
-    $('#inner').text(data.hello.text);
+    $('#inner').append("</br>")
+    $('#inner').append(data.hello.text);
 
     
 
@@ -19,14 +25,32 @@
   });
 </script>
 
+<script>
+$(document).ready(function() {
+  $(function(){
+    $('#btn').on('click', function(){
+        var inputtag = usr.value;
+        console.log(inputtag);
+        socket.emit('message', inputtag);
+    });
+});
+
+});
+</script>
+
 </head>
 
 <body>
 
 <h2>Greetings</h2>
-<div class="container">
-  <div id="inner">Hello</div>
+<div class="container" style="width:500px" style="float: right">
+<label for="usr">Search Hashtag and click on Ok</label>
+  <input type="text" class="form-control" id="usr">
+  <Button id = "btn"> Ok </Button>
+  <div id="inner">Here are your tweets</div>
   
+</div>
+
 </div>
 
 

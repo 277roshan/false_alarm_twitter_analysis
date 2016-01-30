@@ -50,26 +50,30 @@ var client = new Twitter({
     access_token_key:'149006328-GbCda82JmUKsmDMCdwqhSBHBRgf2GdAOtYZxrDfl',
     access_token_secret:'oPjgq9lkWfsqZOQ2PTQNRe1EH8ANYuAoFMwb9LHIYj4yg'
 });
- 
 
 var current_tweet = ''
-client.stream('statuses/filter', {track: 'fire'}, function(stream) {
-  stream.on('data', function(tweet) {
-    // console.log(tweet.text);
-    //   app.get('/',function(req,res){
-    //   res.render('index',{x:"sasddssssssdf"});
-    //   res.send(tweets);
-    // });
-  current_tweet = tweet
+var tweetdemanded = "";
 
 
+io.sockets.on('connection', function (socket) {
+  socket.emit('message', 'You are connected!');
 
-  });
+  socket.on('message', function(message){
+     tweetdemanded = message;
+    client.stream('statuses/filter', {track: tweetdemanded}, function(stream) {
+         stream.on('data', function(tweet) {
+         current_tweet = tweet
+         });
  
-  stream.on('error', function(error) {
-    throw error;
+        stream.on('error', function(error) {
+        throw error;
+        });
+    });
+
   });
 });
+
+
 
 
 setInterval(function() {
