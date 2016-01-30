@@ -10,6 +10,7 @@ var app = express();
 //Let's set up a port for our server to listen on
 var port = 8300;
 
+var path = require('path');
 //Just one basic server response, to make sure our server is working.
 // app.get('/*', function(req, res){  
 //   res.send('Hello World');
@@ -40,8 +41,9 @@ client.get('friends/ids', params, function(error, tweets, response){
   if (!error) {
     console.log(tweets);
 
-    app.get('/*',function(req,res){
-        res.send(tweets);
+    app.get('/',function(req,res){
+      res.sendFile(path.join(__dirname + '/index.html'));
+      //res.send(tweets);
     });
   }
 });
