@@ -7,6 +7,12 @@ var express = require('express');
 //This sets up our app as a basic express server.
 var app = express();
 
+app.set('port', process.env.PORT || 3000);
+app.set('view engine', 'ejs');
+
+
+
+
 //Let's set up a port for our server to listen on
 var port = 8300;
 
@@ -37,16 +43,18 @@ var client = new Twitter({
 });
  
 var params = {screen_name: 'nodejs'};
-client.get('friends/ids', params, function(error, tweets, response){
+client.get('search/tweets.json?q=%23fire&src=typd', params, function(error, tweets, response){
   if (!error) {
-    console.log(tweets);
+   
 
     app.get('/',function(req,res){
-      res.sendFile(path.join(__dirname + '/index.html'));
+      res.sendFile(path.join(__dirname + '/index.html'),{x:"sadf"});
       //res.send(tweets);
     });
   }
 });
+
+
 
 
 
