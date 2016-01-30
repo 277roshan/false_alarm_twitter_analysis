@@ -46,24 +46,36 @@ var client = new Twitter({
 });
  
 var params = {screen_name: 'nodejs'};
-client.get('search/tweets.json?q=%23fire&src=typd', params, function(error, tweets, response){
-  if (!error) {
+
+client.stream('statuses/filter', {track: 'firealarm'}, function(stream) {
+  stream.on('data', function(tweet) {
+    console.log(tweet.text);
+  });
+ 
+  stream.on('error', function(error) {
+    throw error;
+  });
+});
+
+
+// client.stream('search/tweets.json?q=%23fire&src=typd', params, function(error, tweets, response){
+//   if (!error) {
 
     
-    for (x = 0; x < tweets.statuses.length; x++){
+//     for (x = 0; x < tweets.statuses.length; x++){
 
-      console.log(tweets.statuses[x].text);
-      console.log("    ");
-    }
-    console.log(tweets.search_metadata.count);
+//       console.log(tweets.statuses[x].text);
+//       console.log("    ");
+//     }
+//     console.log(tweets.search_metadata.count);
 
 
-    app.get('/',function(req,res){
-      res.render('index',{x:"sasddssssssdf"});
-      //res.send(tweets);
-    });
-  }
-});
+//     app.get('/',function(req,res){
+//       res.render('index',{x:"sasddssssssdf"});
+//       //res.send(tweets);
+//     });
+//   }
+// });
 
 
 
