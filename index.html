@@ -1,5 +1,42 @@
 <html>
-<title></title>
 
-<body>adsfasdfasdf</body>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+
+
+<script>
+  var socket = io('http://localhost:8300');
+  socket.on('news', function (data) {
+    console.log(data);
+    $('#inner').text(data.hello.text);
+
+    
+
+    socket.emit('my other event', { my: 'data' });
+  });
+</script>
+
+</head>
+
+<body>
+
+<h2>Greetings</h2>
+<div class="container">
+  <div id="inner">Hello</div>
+  
+</div>
+
+
+</body>
 </html>
+
+
+
+
+
+
+
+

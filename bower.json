@@ -1,0 +1,15 @@
+{
+  "name": "node-ejs",
+  "description": "fake alarms",
+  "main": "index.js",
+  "license": "ISC",
+  "homepage": "https://github.com/277roshan/false_alarm_twitter_analysis",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
