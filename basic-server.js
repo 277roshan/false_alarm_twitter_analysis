@@ -4,11 +4,14 @@
 //We require express to use all of its useful features, and to make writing node a lot easier
 var express = require('express');
 
+
+var EJS  = require('ejs');
 //This sets up our app as a basic express server.
 var app = express();
+app.set('view engine','ejs');
 
-app.set('port', process.env.PORT || 3000);
-app.set('view engine', 'ejs');
+
+// app.set('view engine', 'ejs');
 
 
 
@@ -16,7 +19,7 @@ app.set('view engine', 'ejs');
 //Let's set up a port for our server to listen on
 var port = 8300;
 
-var path = require('path');
+
 //Just one basic server response, to make sure our server is working.
 // app.get('/*', function(req, res){  
 //   res.send('Hello World');
@@ -45,9 +48,7 @@ var client = new Twitter({
 var params = {screen_name: 'nodejs'};
 client.get('search/tweets.json?q=%23fire&src=typd', params, function(error, tweets, response){
   if (!error) {
-<<<<<<< HEAD
-   
-=======
+
     
     for (x = 0; x < tweets.statuses.length; x++){
 
@@ -55,10 +56,10 @@ client.get('search/tweets.json?q=%23fire&src=typd', params, function(error, twee
       console.log("    ");
     }
     console.log(tweets.search_metadata.count);
->>>>>>> cfe6bf609f487d8ed453b37004bd28b9f6488b1f
+
 
     app.get('/',function(req,res){
-      res.sendFile(path.join(__dirname + '/index.html'),{x:"sadf"});
+      res.render('index',{x:"sasddssssssdf"});
       //res.send(tweets);
     });
   }
