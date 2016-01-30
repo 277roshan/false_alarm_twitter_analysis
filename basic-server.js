@@ -36,7 +36,6 @@ function handler (req, res) {
   });
 }
 
-
 //Now lets set up a twitter account from dev.twitter.com
 
  
@@ -52,6 +51,8 @@ var client = new Twitter({
 });
 
 var current_tweet = ''
+var number_of_tweets = 0
+var all_tweets = []
 var tweetdemanded = "";
 
 
@@ -59,10 +60,19 @@ io.sockets.on('connection', function (socket) {
   socket.emit('message', 'You are connected!');
 
   socket.on('message', function(message){
+    number_of_tweets = 0
      tweetdemanded = message;
     client.stream('statuses/filter', {track: tweetdemanded}, function(stream) {
          stream.on('data', function(tweet) {
          current_tweet = tweet
+         all_tweets.push(current_tweet)
+         if (all_tweets.length>100)
+         {
+          all_tweets.pop()
+         } 
+         number_of_tweets = number_of_tweets +1
+         // console.log(number_of_tweets)
+
          });
  
         stream.on('error', function(error) {
@@ -78,15 +88,7 @@ io.sockets.on('connection', function (socket) {
 
 setInterval(function() {
   // method to be executed;
-
-  
-  io.sockets.emit('news', { hello: current_tweet });
-  
-  
-
-
-
-
+  io.sockets.emit('news', { hello: current_tweet ,number_of_tweets: number_of_tweets});
 }, 5000);
 
  

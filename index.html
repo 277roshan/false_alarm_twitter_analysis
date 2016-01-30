@@ -18,6 +18,7 @@
     console.log(data);
     $('#inner').append("</br>")
     $('#inner').append(data.hello.text);
+    $('#number').text(data.number_of_tweets);
 
     
 
@@ -43,6 +44,7 @@ $(document).ready(function() {
 <body>
 
 <h2>Greetings</h2>
+<div id="number"></div>
 <div class="container" style="width:400px; float: right" background-color = "grey" >
 <label for="usr">Search Hashtag and click on Ok</label>
   <input type="text" class="form-control" id="usr">
