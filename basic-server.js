@@ -53,7 +53,7 @@ var client = new Twitter({
 var current_tweet = ''
 var number_of_tweets = 0
 var all_tweets = []
-var tweetdemanded = "";
+var tweetdemanded = ""
 
 
 io.sockets.on('connection', function (socket) {
@@ -70,8 +70,9 @@ io.sockets.on('connection', function (socket) {
          {
           all_tweets.pop()
          } 
+
          number_of_tweets = number_of_tweets +1
-         // console.log(number_of_tweets)
+          console.log(number_of_tweets)
 
          });
  
