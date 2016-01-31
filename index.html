@@ -9,16 +9,26 @@
 
 
 
-<div>hi</div>
+
 
 
 <script>
+  var imgurl = "";
   var socket = io('http://localhost:8300');
   socket.on('news', function (data) {
     console.log(data);
+    if (data.hello.entities.media[0]){
+        imgurl = data.hello.entities.media[0].media_url
+        $('#mypic').attr("src", imgurl);
+      console.log(data.hello.entities.media[0].media_url);
+     }
+
+
+     
     $('#inner').append("</br>")
     $('#inner').append(data.hello.text);
     $('#number').text(data.number_of_tweets);
+
 
     
 
@@ -26,12 +36,14 @@
   });
 </script>
 
+
 <script>
 $(document).ready(function() {
   $(function(){
     $('#btn').on('click', function(){
         var inputtag = usr.value;
         console.log(inputtag);
+
         socket.emit('message', inputtag);
     });
 });
@@ -40,12 +52,15 @@ $(document).ready(function() {
 </script>
 
 </head>
+<body style= "background-color: #ADD8E6">
 
-<body>
 
-<h2>Greetings</h2>
-<div id="number"></div>
-<div class="container" style="width:400px; float: right" background-color = "grey" >
+
+
+<h2>Finding out</h2>
+<img src = "" id="mypic">
+<div class="container" style="width:400px; background-color: #87CEFA; float: right" background-color = "grey" >
+
 <label for="usr">Search Hashtag and click on Ok</label>
   <input type="text" class="form-control" id="usr">
   <Button id = "btn"> Ok </Button>
