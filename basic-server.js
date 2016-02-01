@@ -45,7 +45,7 @@ var Twitter = require('twitter');
  
 
 
- 
+
 var client = new Twitter({
   consumer_key:'I4mFwvHxDXs6tYIoQ15kWSMEa',
     consumer_secret:'n0B2Z6T4fYAOv1cnPXwQd7r6Sd8inmBSHcgOQ7IYJ4dV3HWpQ7',
@@ -57,7 +57,7 @@ var current_tweet = ''
 var number_of_tweets = 0
 var all_tweets = []
 var tweetdemanded = ""
-
+var a;
 
 io.sockets.on('connection', function (socket) {
   socket.emit('message', 'You are connected!');
@@ -65,7 +65,13 @@ io.sockets.on('connection', function (socket) {
   socket.on('message', function(message){
     number_of_tweets = 0
      tweetdemanded = message;
+     if (a){
+      a.destroy() 
+     }
+     
+
     client.stream('statuses/filter', {track: tweetdemanded}, function(stream) {
+        a = stream
          stream.on('data', function(tweet) {
          current_tweet = tweet
          all_tweets.push(current_tweet)
