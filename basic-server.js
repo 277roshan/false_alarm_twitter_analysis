@@ -43,6 +43,9 @@ function handler (req, res) {
 //Find these in your applications API Keys tab
 var Twitter = require('twitter');
  
+
+
+ 
 var client = new Twitter({
   consumer_key:'I4mFwvHxDXs6tYIoQ15kWSMEa',
     consumer_secret:'n0B2Z6T4fYAOv1cnPXwQd7r6Sd8inmBSHcgOQ7IYJ4dV3HWpQ7',

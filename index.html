@@ -8,10 +8,6 @@
 <script src="/socket.io/socket.io.js"></script>
 
 
-
-
-
-
 <script>
   var imgurl = "";
   var socket = io('http://localhost:8300');
@@ -24,9 +20,12 @@
      }
 
 
+    var colors = ["pink", "orange"]
+    var color = colors[Math.floor(Math.random()*colors.length)];
 
-    
-    $('#inner').prepend(data.hello.text);
+
+
+    $('#inner').prepend("<div style=\"background-color:" + color + "\"><br>" + data.hello.text + "</div>");
     $('#inner').append("</br>")
     // $('#number').text(data.number_of_tweets);
 
@@ -59,8 +58,8 @@ $(document).ready(function() {
 
 
 <h2>Finding out</h2>
-<img src = "" id="mypic">
-<div class="container" style="width:400px; background-color: #87CEFA; float: right" background-color = "grey" >
+<img src = "" id="mypic" style="height:600px; width:500px">
+<div class="container" style="width:500px; background-color: #87CEFA; float: right" background-color = "grey" >
 
 <label for="usr">Search Hashtag and click on Ok</label>
   <input type="text" class="form-control" id="usr">
